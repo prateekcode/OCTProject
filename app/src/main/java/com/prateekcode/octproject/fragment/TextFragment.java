@@ -25,6 +25,10 @@ public class TextFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentTextBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+
+        String scannedText = getArguments().getString("scanned");
+        binding.scannedText.setText(scannedText);
+
         return view;
     }
 }

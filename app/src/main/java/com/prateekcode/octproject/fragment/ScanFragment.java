@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.util.SparseArray;
@@ -20,6 +21,7 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.prateekcode.octproject.MainActivity;
+import com.prateekcode.octproject.R;
 import com.prateekcode.octproject.databinding.FragmentScanBinding;
 
 import java.io.IOException;
@@ -117,6 +119,21 @@ public class ScanFragment extends Fragment {
                     final SparseArray<TextBlock> items = detections.getDetectedItems();
                     if (items.size() != 0) {
                         Log.d(TAG, "receiveDetections: "+ items);
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (int i=0; i< items.size(); i++){
+                            TextBlock item = items.valueAt(i);
+                            stringBuilder.append(item.getValue());
+                            stringBuilder.append("\n");
+                        }
+                        Log.d(TAG, "receiveDetections: "+ stringBuilder.toString());
+                        TextFragment textFragment = new TextFragment();
+                        Bundle args = new Bundle();
+                        args.putString("scanned", stringBuilder.toString());
+                        textFragment.setArguments(args);
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_container, textFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
 //                        mTextView.post(() -> {
 //                            StringBuilder stringBuilder = new StringBuilder();
 //                            for (int i = 0; i < items.size(); i++) {
