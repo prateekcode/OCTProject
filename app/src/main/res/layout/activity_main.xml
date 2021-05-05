@@ -3,29 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="5"
         tools:context=".MainActivity">
 
-        <SurfaceView
-            android:id="@+id/surfaceView"
+        <LinearLayout
+            android:visibility="gone"
+            android:weightSum="5"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4" />
+            android:layout_height="match_parent">
+            <SurfaceView
+                android:id="@+id/surfaceView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4" />
 
-        <TextView
-            android:id="@+id/text_view"
+            <TextView
+                android:id="@+id/text_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Text Message"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Text Message"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
+
+
 </layout>
